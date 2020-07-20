@@ -1,4 +1,5 @@
 # Auth0 Django Samples
+by Mike Bochenek
 
 [![CircleCI](https://circleci.com/gh/auth0-samples/auth0-django-web-app.svg?style=svg)](https://circleci.com/gh/auth0-samples/auth0-django-web-app)
 
