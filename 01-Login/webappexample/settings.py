@@ -123,6 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+DOMAIN = 'chequeli.bochenek.ch'
 
 ENV_FILE = find_dotenv()
 if ENV_FILE:
