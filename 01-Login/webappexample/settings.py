@@ -124,7 +124,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-ENV_FILE = find_dotenv()
+ENV_FILE = '/var/lib/jenkins/workspace/chequeli/01-Login/.env' # find_dotenv()
 if ENV_FILE:
     load_dotenv(ENV_FILE)
 
