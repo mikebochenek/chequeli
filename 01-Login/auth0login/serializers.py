@@ -10,4 +10,4 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class ScanSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Scan
-        fields = ['scan_type', 'raw_text', 'blob_id', 'blob_url', 'nice_filename', 'nice_path', 'local_path']
+        fields = ['scan_type', 'raw_text', 'blob_id', 'blob_url', 'nice_filename', 'nice_path', 'local_path', 'user_id']
