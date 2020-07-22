@@ -38,3 +38,18 @@ def logout(request):
     logout_url = 'https://%s/v2/logout?client_id=%s&%s' % \
                  (settings.SOCIAL_AUTH_AUTH0_DOMAIN, settings.SOCIAL_AUTH_AUTH0_KEY, return_to)
     return HttpResponseRedirect(logout_url)
+
+
+from django.contrib.auth.models import User
+from .models import Scan
+from rest_framework import viewsets
+from .serializers import UserSerializer, ScanSerializer
+
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+
+class ScanViewSet(viewsets.ModelViewSet):
+    queryset = Scan.objects.all().order_by('-created_at')
+    serializer_class = ScanSerializer
