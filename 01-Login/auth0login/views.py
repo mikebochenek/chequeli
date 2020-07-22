@@ -53,3 +53,18 @@ class UserViewSet(viewsets.ModelViewSet):
 class ScanViewSet(viewsets.ModelViewSet):
     queryset = Scan.objects.all().order_by('-created_at')
     serializer_class = ScanSerializer
+    
+from django.shortcuts import render
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+
+def simple_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'simple_upload.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'simple_upload.html')

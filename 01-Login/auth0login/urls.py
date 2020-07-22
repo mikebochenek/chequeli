@@ -9,6 +9,7 @@ router.register(r'scans', views.ScanViewSet)
 urlpatterns = [
     path('', views.index),
     path('dashboard', views.dashboard),
+    path('upload', views.simple_upload),
     path('logout', views.logout),
     path('', include('django.contrib.auth.urls')),
     path('', include('social_django.urls')),
