@@ -2,13 +2,19 @@
 
 {% block content %}
     <div class="login-page clearfix">
-        <div class="login-box auth0-box before">
-            <img src="https://i.cloudup.com/StzWWrY34s.png" />
-            <h3>Auth0 Cheque.li DEV login</h3>
-            <p>Using auth0.com - Zero friction identity infrastructure, built for developers</p>
-            <a id="qsLoginBtn" class="btn btn-primary btn-lg btn-login btn-block" href="/login/auth0">Log In (using Auth0)</a>
-        </div>
+        <h1>cheque.li development environment</h1>
+    
         <hr>
-        <a id="qsLoginBtn" class="btn btn-primary btn-lg btn-login btn-block" href="/admin">Django /admin (test/test)</a>
+        <img src="https://i.cloudup.com/StzWWrY34s.png" width="25pcx" />
+        <small>Login using auth0.com, test upload & OCR</small>
+        <a id="qsLoginBtn" class="btn btn-login btn-block" href="/login/auth0">Log In</a>
+        
+        <hr>
+        <small>View API directory (swagger)</small>
+        <a id="qsLoginBtn" class="btn btn-block" href="/admin">APIs</a>
+        
+        <hr>
+        <small>Django DB Admin (credentials: test/test)</small>
+        <a id="qsLoginBtn" class="btn btn-block" href="/admin">DB admin</a>
     </div>
 {% endblock content %}
