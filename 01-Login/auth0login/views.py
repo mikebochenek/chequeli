@@ -57,14 +57,19 @@ class ScanViewSet(viewsets.ModelViewSet):
 from django.shortcuts import render
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+import logging
+import os
+
+logger = logging.getLogger(__name__)
 
 def simple_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
-        fs = FileSystemStorage(location='/tmp/media/uploads')
-        filename = fs.save(myfile.name, myfile)
+        fs = FileSystemStorage('/tmp/media/uploads')
+        path = os.path.join(fs.location, myfile.name)
+        filename = fs.save(path, myfile)
         uploaded_file_url = fs.url(filename)
         return render(request, 'simple_upload.html', {
-            'uploaded_file_url': uploaded_file_url
+            'uploaded_file_url': filename
         })
     return render(request, 'simple_upload.html')
