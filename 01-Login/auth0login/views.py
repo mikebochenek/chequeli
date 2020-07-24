@@ -64,10 +64,17 @@ def simple_upload(request):
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         
-        # curl -X PUT --data-binary @1035697936.pdf http://localhost:9998/tika --header "Content-type: application/pdf"
-        # tika_output = subprocess.check_output(["curl", "-X", "GET", "http://localhost:9998/tika"])
-        tika_output = subprocess.check_output(["curl", "-X", "PUT", "--data-binary", "@"+fs.path(filename), 
-                                               "http://localhost:9998/tika", "--header", "Content-type: application/pdf"])
+        if (str(myfile.name).lower().endswith(".pdf")):
+            contenttype = "Content-type: application/pdf"
+        elif (str(myfile.name).lower().endswith(".jpg")):
+            contenttype = "Content-type: image/jpg"
+        elif (str(myfile.name).lower().endswith(".jpeg")):
+            contenttype = "Content-type: image/jpeg"
+        elif (str(myfile.name).lower().endswith(".png")):
+            contenttype = "Content-type: image/png"
+            
+        tika_input = ["curl", "-X", "PUT", "--data-binary", "@"+fs.path(filename), settings.TIKA_URL, "--header", contenttype]
+        tika_output = subprocess.check_output(tika_input)
 
         return render(request, 'simple_upload.html', {
             'uploaded_file_url': fs.path(filename),

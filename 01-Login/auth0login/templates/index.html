@@ -2,17 +2,20 @@
 
 {% block content %}
     <div class="login-page clearfix">
-        <h2>cheque.li development environment</h2>
+        <h2>cheque.li DEV environment</h2>
     
-        <a id="qsLoginBtn" class="btn" href="/login/auth0">Log In</a>
+        <a class="btn" href="/login/auth0">Log In</a>
         <div>Login using auth0.com, test upload & OCR</div>
         <br>
         
-        <a id="qsLoginBtn" class="btn" href="/api">APIs</a>
+        <a class="btn" href="/api">APIs</a>
         <div>View API directory</div>
         <br>
 
-        <a id="qsLoginBtn" class="btn" href="/admin">DB admin</a>
+        <a class="btn" href="/admin">DB admin</a>
         <div>Django DB Admin (credentials: test/test)</div>
+        
+        <br><br><br><hr>
+        <a href="https://jenkins.bochenek.ch/">jenkins CI</a> - <a href="https://jupyter.bochenek.ch/">Jupyter instance</a>
     </div>
 {% endblock content %}
