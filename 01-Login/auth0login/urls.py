@@ -5,6 +5,8 @@ from rest_framework import routers
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'scans', views.ScanViewSet)
+router.register(r'tags', views.TagViewSet)
+router.register(r'eventlogs', views.EventLogViewSet)
 
 urlpatterns = [
     path('', views.index),

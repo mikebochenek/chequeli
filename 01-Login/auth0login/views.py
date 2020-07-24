@@ -1,5 +1,5 @@
-from .models import Scan
-from .serializers import UserSerializer, ScanSerializer
+from .models import Scan, EventLog, Tag
+from .serializers import UserSerializer, ScanSerializer, TagSerializer, EventLogSerializer
 from rest_framework import viewsets
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
@@ -54,6 +54,13 @@ class ScanViewSet(viewsets.ModelViewSet):
     queryset = Scan.objects.all().order_by('-created_at')
     serializer_class = ScanSerializer
     
+class EventLogViewSet(viewsets.ModelViewSet):
+    queryset = EventLog.objects.all().order_by('-created_at')
+    serializer_class = EventLogSerializer
+
+class TagViewSet(viewsets.ModelViewSet):
+    queryset = Tag.objects.all().order_by('-created_at')
+    serializer_class = TagSerializer
 
 logger = logging.getLogger(__name__)
 
