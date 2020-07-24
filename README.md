@@ -1,5 +1,5 @@
 # Cheque.li backend
-by Mike Bochenek
+Backend for cheque.li
 
 ## Django basics
 Standard Django commands:
@@ -24,11 +24,13 @@ or enterprise identity systems like Windows Azure AD, Google Apps, Active Direct
 ## Tika
 The [Apache Tika™](https://tika.apache.org/) toolkit detects and extracts metadata and text from over a thousand different file types
 * https://cwiki.apache.org/confluence/display/TIKA/TikaServer
-* ./tika start -p 9998
 * https://cwiki.apache.org/confluence/display/TIKA/TikaOCR
+```
+./tika start -p 9998
+```
 
 ## SQL
-Currently using [PostgreSQL](https://www.postgresql.org/) but Django can be quickly reconfigured to use anything else
+Currently using [PostgreSQL](https://www.postgresql.org/) but Django can be quickly reconfigured to use anything else by updating settings.py
 ```
 psql -h 127.0.0.1 -U test3 --password
 create database chequelidev;
@@ -36,7 +38,7 @@ psql -h 127.0.0.1 -U test3 --password chequelidev
 ```
 
 ## Apache2
-see config folder in this project 
+See config folder in this project to see how Apache2 is configured to serve Django
 
 ## Jenkins
 Currently [Jenkins](https://jenkins.bochenek.ch) runs the following build script which is triggered by a webhook
@@ -50,4 +52,12 @@ rm -rf static
 ```
 
 ## Other commands
+```
 cd /var/lib/jenkins/workspace/chequeli
+service apache2 restart
+```
+
+## TODOs
+* .env file is not autodetected, and full path is hardcoded
+* somehow OCR does not work for JPGs and PNGs yet
+* APIs are open to everone (needs to respect currently logged in user - based on JWT token)
