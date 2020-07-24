@@ -3,14 +3,25 @@
 {% block content %}
   <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
+    
     <div>only works for PDF files for now...</div>
-    <input type="file" name="myfile">
-    <button type="submit">Upload</button>
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file" name="myfile">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+        
+    <button class="btn" type="submit">Upload</button>
   </form>
 
   {% if uploaded_file_url %}
     <p>File uploaded at: {{ uploaded_file_url }}</p>
+    <hr>
     <pre> {{ tika_output }} </pre>
   {% endif %}
 
-{% endblock %}
+{% endblock content %}

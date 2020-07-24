@@ -3,7 +3,7 @@
 {% block content %}
 <div class="login-page clearfix">
     <div class="logged-in-box auth0-box logged-in">
-        <img src="https://i.cloudup.com/StzWWrY34s.png" width="25pcx" /><img class="avatar" src="{{ auth0User.extra_data.picture }}"/>
+        <img src="https://i.cloudup.com/StzWWrY34s.png" width="25pcx" /><img class="avatar" width="125pcx" src="{{ auth0User.extra_data.picture }}"/>
         <h3>Welcome {{ user.username }}</h3>
         <pre>{{ userdata }}</pre>
         <a id="qsLogoutBtn" class="btn" href="/logout">Logout</a>  <a id="qsUploadBtn" class="btn" href="/upload">Test upload</a>

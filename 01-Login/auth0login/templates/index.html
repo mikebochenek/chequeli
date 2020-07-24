@@ -2,19 +2,17 @@
 
 {% block content %}
     <div class="login-page clearfix">
-        <h1>cheque.li development environment</h1>
+        <h2>cheque.li development environment</h2>
     
-        <hr>
-        <img src="https://i.cloudup.com/StzWWrY34s.png" width="25pcx" />
-        <small>Login using auth0.com, test upload & OCR</small>
-        <a id="qsLoginBtn" class="btn btn-login btn-block" href="/login/auth0">Log In</a>
+        <a id="qsLoginBtn" class="btn" href="/login/auth0">Log In</a>
+        <div>Login using auth0.com, test upload & OCR</div>
+        <br>
         
-        <hr>
-        <small>View API directory (swagger)</small>
-        <a id="qsLoginBtn" class="btn btn-block" href="/api">APIs</a>
-        
-        <hr>
-        <small>Django DB Admin (credentials: test/test)</small>
-        <a id="qsLoginBtn" class="btn btn-block" href="/admin">DB admin</a>
+        <a id="qsLoginBtn" class="btn" href="/api">APIs</a>
+        <div>View API directory</div>
+        <br>
+
+        <a id="qsLoginBtn" class="btn" href="/admin">DB admin</a>
+        <div>Django DB Admin (credentials: test/test)</div>
     </div>
 {% endblock content %}
