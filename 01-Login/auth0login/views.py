@@ -1,10 +1,16 @@
+from .models import Scan
+from .serializers import UserSerializer, ScanSerializer
+from rest_framework import viewsets
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout as log_out
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from urllib.parse import urlencode
-
+from django.core.files.storage import FileSystemStorage
+import logging
+import subprocess
 import json
 
 
@@ -40,12 +46,6 @@ def logout(request):
     return HttpResponseRedirect(logout_url)
 
 
-from django.contrib.auth.models import User
-from .models import Scan
-from rest_framework import viewsets
-from .serializers import UserSerializer, ScanSerializer
-
-
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
@@ -54,19 +54,23 @@ class ScanViewSet(viewsets.ModelViewSet):
     queryset = Scan.objects.all().order_by('-created_at')
     serializer_class = ScanSerializer
     
-from django.shortcuts import render
-from django.conf import settings
-from django.core.files.storage import FileSystemStorage
-import logging
 
 logger = logging.getLogger(__name__)
 
+@login_required
 def simple_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
+        
+        # curl -X PUT --data-binary @1035697936.pdf http://localhost:9998/tika --header "Content-type: application/pdf"
+        # tika_output = subprocess.check_output(["curl", "-X", "GET", "http://localhost:9998/tika"])
+        tika_output = subprocess.check_output(["curl", "-X", "PUT", "--data-binary", "@"+fs.path(filename), 
+                                               "http://localhost:9998/tika", "--header", "Content-type: application/pdf"])
+
         return render(request, 'simple_upload.html', {
-            'uploaded_file_url': fs.path(filename)
+            'uploaded_file_url': fs.path(filename),
+            'tika_output': str(tika_output).replace("\\n", "\n")
         })
     return render(request, 'simple_upload.html')

@@ -96,3 +96,7 @@ label {
 .login-page .login-box {
   padding: 100px 0;
 }
+
+pre {
+    white-space: pre-wrap;
+}
