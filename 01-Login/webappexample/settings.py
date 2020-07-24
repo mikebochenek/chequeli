@@ -165,6 +165,6 @@ LOGIN_REDIRECT_URL = '/dashboard'
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/tmp/media' # os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = 'media' #'/tmp/media' # os.path.join(BASE_DIR, 'media')
 
 TIKA_URL = 'http://localhost:9998/tika'
