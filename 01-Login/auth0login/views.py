@@ -57,7 +57,6 @@ class ScanViewSet(viewsets.ModelViewSet):
 from django.shortcuts import render
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from django.core.files.storage import default_storage
 import logging
 
 logger = logging.getLogger(__name__)
@@ -65,9 +64,9 @@ logger = logging.getLogger(__name__)
 def simple_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
-        #fs = FileSystemStorage('/tmp/media/uploads')
-        filename = default_storage.save(myfile.name, myfile)
-        uploaded_file_url = default_storage.url(filename)
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        #uploaded_file_url = fs.url(filename)
         return render(request, 'simple_upload.html', {
             'uploaded_file_url': filename
         })
