@@ -82,6 +82,11 @@ def simple_upload(request):
             
         tika_input = ["curl", "-X", "PUT", "--data-binary", "@"+fs.path(filename), settings.TIKA_URL, "--header", contenttype]
         tika_output = subprocess.check_output(tika_input)
+        
+        s = Scan(scan_type=1, raw_text=tika_output, blob_id=0, blob_url='',
+                 nice_filename=myfile.name, nice_path='', local_path=fs.path(filename),
+                 user=request.user)
+        s.save()
 
         return render(request, 'simple_upload.html', {
             'uploaded_file_url': fs.path(filename),
