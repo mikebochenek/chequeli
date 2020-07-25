@@ -3,10 +3,34 @@
 {% block content %}
 <div class="login-page clearfix">
     <div class="logged-in-box auth0-box logged-in">
-        <img src="https://i.cloudup.com/StzWWrY34s.png" width="25pcx" /><img class="avatar" width="125pcx" src="{{ auth0User.extra_data.picture }}"/>
+        <img class="avatar" width="125pcx" src="{{ auth0User.extra_data.picture }}"/>
         <h3>Welcome {{ user.username }}</h3>
         <pre>{{ userdata }}</pre>
-        <a id="qsLogoutBtn" class="btn" href="/logout">Logout</a>  <a id="qsUploadBtn" class="btn" href="/upload">Test upload</a>
+        <a class="btn" href="/logout">Logout</a>  <a class="btn" href="/upload">Test upload</a>
+        
+        <h3>My scans</h3>
+        <table class="striped">
+        <thead>
+          <tr>
+              <th>id</th>
+              <th>nice path</th>
+              <th>nice filename</th>
+              <th>created at</th>
+              <th>json</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        {% for s in scans %}
+          <tr>
+            <td>{{ s.id }}</td>
+            <td>{{ s.nice_path }}</td>
+            <td>{{ s.nice_filename }}</td>
+            <td>{{ s.created_at }}</td>
+            <td><a href="{{ HTTP_ORIGIN }}/api/scans/{{ s.id }}">link</a></td>
+          </tr>
+		{% endfor %}
+		</tbody>
     </div>
 </div>
 {% endblock content %}

@@ -8,6 +8,7 @@ from django.contrib.auth import logout as log_out
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from urllib.parse import urlencode
+from datetime import datetime
 from django.core.files.storage import FileSystemStorage
 import logging
 import subprocess
@@ -32,9 +33,12 @@ def dashboard(request):
         'picture': auth0user.extra_data['picture'],
         'email': auth0user.extra_data['email']
     }
+    
+    scans = Scan.objects.filter(user=user)
 
     return render(request, 'dashboard.html', {
         'auth0User': auth0user,
+        'scans': scans,
         'userdata': json.dumps(userdata, indent=4)
     })
 
@@ -67,6 +71,7 @@ logger = logging.getLogger(__name__)
 @login_required
 def simple_upload(request):
     if request.method == 'POST' and request.FILES['myfile']:
+        startTime = datetime.now()
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
@@ -87,6 +92,8 @@ def simple_upload(request):
                  nice_filename=myfile.name, nice_path='', local_path=fs.path(filename),
                  user=request.user)
         s.save()
+        
+        print(datetime.now() - startTime, 'ms taken to process ', filename) 
 
         return render(request, 'simple_upload.html', {
             'uploaded_file_url': fs.path(filename),

@@ -5,9 +5,11 @@ Backend for cheque.li
 Standard Django commands:
 ```
 virtualenv -p /usr/bin/python3 myenv
+source ./myenv/bin/activate
 pip install -r requirements.txt
 python manage.py makemigrations 
 python manage.py migrate
+python manage.py shell
 python manage.py createsuperuser   # test/test
 python manage.py runserver 3000
 ```
@@ -55,9 +57,11 @@ rm -rf static
 ```
 cd /var/lib/jenkins/workspace/chequeli
 service apache2 restart
+cd ~/tools/tika-server-1.24-bin/bin
 ```
 
 ## TODOs
 * .env file is not autodetected, and full path is hardcoded
-* somehow OCR does not work for JPGs and PNGs yet
-* APIs are open to everone (needs to respect currently logged in user - based on JWT token)
+* APIs are open to everone (needs to respect currently logged in user - based on JWT token) - secure based on [link](https://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/)
+* setup (error)logging
+* rename 01-Login / webappexample (but DB tables & apache2 config would need to be updated as well
